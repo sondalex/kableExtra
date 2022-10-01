@@ -295,7 +295,7 @@ is_latex <- knitr::is_latex_output
 rmd_files_dir <- function(create = TRUE) {
   dir_name <- knitr::opts_chunk$get("fig.path")
   if (!dir.exists(dir_name) & create) dir.create(dir_name, recursive=TRUE)
-  return(fig_dir_name)
+  return(dir_name)
 }
 
 #' Helper functions to generate inline sparklines
