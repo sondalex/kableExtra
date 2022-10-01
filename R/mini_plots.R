@@ -293,11 +293,8 @@ spec_barplot <- function(x, devwidth = 200, devheight = 40, res = 300,
 is_latex <- knitr::is_latex_output
 
 rmd_files_dir <- function(create = TRUE) {
-  curr_file_name <- sub("\\.[^\\.]*$", "", knitr::current_input())
-  dir_name <- paste0(curr_file_name, "_files")
-  if (!dir.exists(dir_name) & create) dir.create(dir_name)
-  fig_dir_name <- file.path(dir_name, "figure-latex")
-  if (!dir.exists(fig_dir_name) & create) dir.create(fig_dir_name)
+  dir_name <- knitr::opts_chunk$get("fig.path")
+  if (!dir.exists(dir_name) & create) dir.create(dir_name, recursive=TRUE)
   return(fig_dir_name)
 }
 
