@@ -293,7 +293,12 @@ spec_barplot <- function(x, devwidth = 200, devheight = 40, res = 300,
 is_latex <- knitr::is_latex_output
 
 rmd_files_dir <- function(create = TRUE) {
-  dir_name <- knitr::opts_chunk$get("fig.path")
+  # prepend base directory, base directory != root.dir, 
+  # base directory: directory of the main .Rmd file
+  current_file <- knitr::current_input(dir=TRUE)
+  base_dir <- dirname(current_file)
+  target_dir <- knitr::opts_chunk$get("fig.path")
+  dir_name <- paste0(base_dir, "/", target_dir)
   if (!dir.exists(dir_name) & create) dir.create(dir_name, recursive=TRUE)
   return(dir_name)
 }
